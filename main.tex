@@ -1,0 +1,167 @@
+\documentclass[conference]{IEEEtran}
+\IEEEoverridecommandlockouts
+% The preceding line is only needed to identify funding in the first footnote. If that is unneeded, please comment it out.
+\usepackage{cite}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{algorithmic}
+\usepackage{graphicx}
+\usepackage{textcomp}
+\usepackage{xcolor}
+\def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
+    T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
+    
+\usepackage{framed}
+
+\begin{document}
+
+\title{Incorporating User Generated Content for Drug Drug Interaction Extraction Task Using Full Attention Mechanism
+\thanks{Funding info.}
+}
+
+\author{\IEEEauthorblockN{1\textsuperscript{st} Given Name Surname}
+\IEEEauthorblockA{\textit{dept. name of organization (of Aff.)} \\
+\textit{name of organization (of Aff.)}\\
+City, Country \\
+email address}
+\and
+\IEEEauthorblockN{2\textsuperscript{nd} Given Name Surname}
+\IEEEauthorblockA{\textit{dept. name of organization (of Aff.)} \\
+\textit{name of organization (of Aff.)}\\
+City, Country \\
+email address}
+\and
+\IEEEauthorblockN{3\textsuperscript{rd} Given Name Surname}
+\IEEEauthorblockA{\textit{dept. name of organization (of Aff.)} \\
+\textit{name of organization (of Aff.)}\\
+City, Country \\
+email address}
+}
+
+\maketitle
+
+\begin{abstract}
+Abstract.
+*CRITICAL: Do Not Use Symbols, Special Characters, Footnotes, 
+or Math in Paper Title or Abstract.
+\end{abstract}
+
+\begin{IEEEkeywords}
+drug drug interaction, drug safety, attention mechanism
+\end{IEEEkeywords}
+
+\section{Introduction}
+Undoubtedly, it will entail a fatal accident if a doctor miscalculates potential interactions
+between miscellaneous medications which are prescribed to a single patient.
+But it is really hard for doctors to keep pace with frequently updated interaction knowledge.
+Traditionally, physicians acquire new published drug drug interactions (DDIs) from two auxiliary information sources:
+reading massive biomedical papers to learn DDIs between the lines
+or querying DDIs from human maintained biomedical databases.
+Obviously, reading tons of rapidly-updated papers is laborious, painful, and inefficient.
+As for searching from a biomedical database, it seems to be feasible.
+But in the consideration of the quantity of the biomedical literature,
+it requires a lot of resources to update, maintain and revise a professional database by hand.
+Apparently, both two of them are not idealistic manners to detect DDIs for doctors.
+
+As the evolution of the artificial intelligence (AI) and natural language processing (NLP),
+researchers intend to build models to extract DDIs from free text utilizing AI and NLP techniques.
+As an illustration, in the following sentence:
+
+\begin{framed}
+Because of its primary CNS effect, caution should be used when \textbf{EQUETRO}
+is taken with other centrally acting drugs and \textbf{alcohol}.
+\end{framed}
+
+\noindent DDI extraction methods attempt to make the prediction of the interaction type such as positive or negative between
+two recognized entities (namely \textbf{EQUETRO} and \textbf{alcohol}, highlighted in bold text).
+
+A lot of related work has been done via two kinds of methods:
+support vector machine (SVM) based methods
+\cite{chowdhury_fbk-irst:_2013, thomas_wbi-ddi:_2013, bjorne_uturku:_2013, rastegar-mojarad_uwm-triads:_2013, kim_extracting_2015}
+and deep learning based methods \cite{zhao_drug_2016, sahu_drug-drug_2017}.
+SVM based methods utilizes hand-crafted features and multiple kinds of kernels.
+Deep learning methods are mainly based on convolutional neural networks (CNN) and recurrent neural networks (RNN).
+Among SVM methods, we observe that introducing external resources can be an effective and preferred manner to improve the performance of DDI extraction.
+As an illustration, the F-socre of \cite{bjorne_uturku:_2013} increases $2\%$ by leveraging the DrugBank database.
+DrugBank database offers more professional knowledge and make up the deficiency of domain-specific semantics during the extraction procedure.
+But these external resources are introduced in the form of human-selected sparse features
+such as the presence of a drug name or a drug pair in the feature engineering step.
+As a consequence, it is very time-consuming to extract these features.
+With the evolution of external resources, it is also really hard to update these features in the future.
+As for deep learning methods, external resources are not under the consideration.
+Deep learning methods always utilize word embeddings as the only information source.
+So it is still a challenge to merge the external resource efficiently into the deep learning models.
+
+Lately, it is very common for physicians to browse online content to capture biomedical information 
+\cite{de_leo_websites_2006}.
+So we attempt to integrate online user-generated-content (UGC) into deep learning models to acquire more timely and easy-to-update knowledge.
+Instead of sparse human-selected features, we merge UGC resource in the form of document distributed representations.
+These dense representations named \emph{UGC embeddings} are learned automatically from the online forum posts
+using an unsupervised document embedding method which is proposed in \cite{le_distributed_2014}.
+Hence, these UGC representations can be obtained and updated conveniently compared with extracting features manually.
+Low-dimensional UGC embeddings are also time-saving and space-efficient in the following computation of the deep learning network.
+
+Besides representations of UGC knowledge, the method to merge UGC embeddings is also very significant.
+Recently, self-attention mechanism is a very hot topic in NLP community.
+The experimental results of a lot of papers showed that it performs well in a lot of NLP tasks such as machine translation \cite{vaswani_attention_2017} 
+and natural language understanding \cite{shen_disan:_2017}.
+Inspired by the self-attention mechanism, we merge UGC embedding with the word embedding in an attentive way
+called \emph{full-attention}.
+From the perspective of the computational complexity, full-attention is a very efficient manner to merge two of them.
+No parameters are needed during the merging process, so there is no training cost of any other extra values.
+We apply \emph{scaled dot product attention} to every single document-word pair. 
+Hence, full-attention can capture global dependency of words and UGC documents comprehensively.
+It concentrates on connections between all documents and all tokens.
+After the full-attention computation, UGC embeddings are combined with word embeddings intelligently without any human intervention.
+
+Based on the ideas we described above, we proposed a brand new DDI extraction method named \emph{UGC-DDI}.
+UGC-DDI merges word embeddings and UGC embeddings together by the full-attention firstly.
+Then the merged vectors are concatenated with the concept embeddings and offset embeddings to generate the final token representations.
+At last, token representations are fed into the encoder and pooling layers to make predictions of DDI types.
+The experimental result shows UGC-DDI outperforms existing methods on DDI 2013 Evaluation dataset.
+
+The rest of this paper is organized as follows. (...)
+
+\section{Method}
+
+The pipeline of our method to extract DDIs is a five-step procedure:
+
+\begin{enumerate}
+	\item In the \emph{preprocessing} step, we conduct several kinds of operations to trim and condense sentences.
+	\item In the \emph{full attention} step, we merge word embeddings and UGC embeddings to introduce the external resource.
+	\item In the \emph{token representation} step, we generate final token representations by concatenating
+	full attention embeddings, concept embeddings and offset embeddings.
+	\item In the \emph{encoder} step, we extract latent features using a stacked two-layer encoder
+	which consist of a bidirectional LSTM layer and a Transformer layer.
+	\item In the \emph{pooling and fully connected} step, we make predictions of DDIs using the extracted latent features above.
+\end{enumerate}
+
+Fig illustrates the basic pipeline of the BR-LSTM method.
+
+\subsection{Preprocessing}
+Preprocessing.
+
+\subsection{UGC Resource Merging}
+UGC Resource Merging.
+
+\subsection{Concept Embedding Concatenating}
+Concept Embedding Concatenating.
+
+\subsection{Bidirectional LSTN Network}
+Bidirectional LSTN Network.
+
+\subsection{Attentive Pooling}
+Attentive Pooling.
+
+\section{Experiments}
+Experiments.
+
+\section{Conclusions}
+Conclusions.
+
+\section*{Acknowledgment}
+Acknowledgment.
+
+\bibliographystyle{IEEEtran}
+\bibliography{main}
+
+\end{document}

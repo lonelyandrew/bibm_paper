@@ -1,0 +1,33 @@
+% !TEX encoding = UTF-8 Unicode
+% paper.tex
+% Paper Draft
+
+% preamble
+\documentclass{standalone}
+
+% meta-data
+\title{}
+\author{}
+\date{}
+
+% packages
+\usepackage{pgfplots}
+\usetikzlibrary{matrix}
+\usepgfplotslibrary{groupplots}
+\pgfplotsset{compat=newest}
+
+% end of preamble
+
+\begin{document}
+\begin{tikzpicture}
+\begin{axis}[width=3.0in, height=3.0in, grid=major, xmin=0, ymin=0, xmax=200, ymax=0.75, axis line style = thick, legend style={at={(0.45,0.02)},anchor=south west}, ytick={0.1, 0.2, ..., 0.7},ylabel=F-score, xlabel=Epoch]
+\addplot[color={rgb:red,0;green,152;blue,126}, thick] table [x=Step, y=Value, col sep=comma] {ugc-f.csv};
+\addplot[color={rgb:red,201;green,45;blue,57}, thick, densely dotted] table [x=Step, y=Value, col sep=comma] {no-ugc-f.csv};
+\legend{with UGC, without UGC}
+\end{axis}
+\end{tikzpicture}
+
+
+\end{document}
+
+% EOF

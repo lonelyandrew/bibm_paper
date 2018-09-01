@@ -12,7 +12,6 @@
 \usepackage{bm}
 \def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
     T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
-    
 \usepackage{framed}
 
 \begin{document}
@@ -461,12 +460,12 @@ UGC embedding dimension & 200\\
 \subsection{Experimental Result}
 
 Table \ref{table:class_metric} presents the evaluation results of every single DDI type.
-As can be seen, ``int'' DDI type only achieves an F-score of $0.4545$ which is much lower than that of other three DDI types.
+As can be seen, ``int'' DDI type only achieves an F-score of $0.4545$ which is much lower than that of the other three DDI types.
 It obtains a recall of $0.3125$ that causes the lowest F-score.
 ``int'' DDI type is assigned when the sentence simply states that an interaction occurs
 and does not provide any information about the interaction \cite{segura-bedmar_semeval-2013_2013}.
-Due to the ambiguous meaning of the ``int'' DDI type, it is error prone to misclassified instances to other specific DDI types.
-The ``mechanism'' type achieves the highest F-score, this is probably because ``mechanism'' describes a pharmacokinetic mechanism.
+Due to the ambiguous meaning of the ``int'' DDI type, it is error-prone to misclassified instances in other specific DDI types.
+The ``mechanism'' type achieves the highest F-score. This is probably because ``mechanism'' describes a pharmacokinetic mechanism.
 Pharmacokinetic means that the effects of one drug are changed by the presence of another drug at its site of action which is relatively not easy to confuse.
 
 \begin{table*}
@@ -490,9 +489,9 @@ classification & 654 & 204 & 325 & 979 & 0.762 & 0.668 & 0.712\\
 \emph{1) Performance comparison}
 \bigbreak
 
-Evaluation metrics comparison with other state-of-the-art methods are showed in the Table \ref{table:comp}.
+Evaluation metrics, in comparison with other state-of-the-art methods are shown in the Table \ref{table:comp}.
 The highest values of every metric are highlighted in bold text.
-Our methods achieved the highest F-score of 0.712 and the highest recall of 0.668 in the comparison.
+Our methods achieved the highest F-score of 0.712 and the highest recall of 0.668 by comparison.
 
 \begin{table}
 \caption{Performance comparison between methods}
@@ -515,59 +514,59 @@ Our methods achieved the highest F-score of 0.712 and the highest recall of 0.66
 \end{table}
 
 The preceding four methods in Table \ref{table:comp} UTurku, WBI-DDI, FBK-irst, and Kim et al. are all support vector machine (SVM) based DDI extraction methods.
-One significant drawback of SVM based models is that they usually utilize complex human-selected lexical or
+One significant drawback of SVM-based models is that they usually utilize complex human-selected lexical or
 syntactical features to form representations of sentences or tokens.
-For examples, Kim et al. which performs best among SVM based DDI extraction methods uses a linear SVM classifier
+For example, Kim et al. which performs best among SVM based DDI extraction methods, uses a linear SVM classifier
 with a rich set of lexical and syntactic features to extract DDI.
 FBK-irst utilize a hybrid kernel SVM classifier with syntax tree and dependency tree features.
 
 SVM based methods are all highly dependent on the external lexical tools such as part-of-speech tagger,
 chunk tagger, and dependency parser to analyze text and construct features from the processing output.
-Errors from the external lexical tools can propagate to the DDI extraction method through the pipeline \cite{jiao_chinese_2018}.
-Selecting features manually is laborious and time-consuming compared with deep learning latent features.
-From another perspective, human-selected features may also perform poor on generalization.
-Compared with FBK-irst and Kim et al., UGC-DDI learns high-level latent features automatically from the deep learning network encoder
+Errors from external lexical tools can propagate to the DDI extraction method through the pipeline \cite{jiao_chinese_2018}.
+Selecting features manually is laborious and time-consuming compared to deep learning latent features.
+From another perspective, human-selected features generally perform poorly.
+Compared to FBK-irst and Kim et al., UGC-DDI learns high-level latent features automatically from the deep learning network encoder
 and the attentive pooling method.
-It also does not depends on any external lexical or syntactical analyzer to generate features.
+Also, generating features does not depend on any external lexical or syntactical analyzer.
 However, UGC-DDI achieves an F-score of $0.712$ which is higher than that of FBK-irst and Kim et al. by $0.061$ and $0.042$, respectively.
 
-Remaining methods in Table \ref{table:comp} are all deep learning based methods.
-They can be categorized into two types: convolutional neural network based methods and bidirectional long short-term memory (Bi-LSTM) network based methods.
-SCNN \cite{zhao_drug_2016} is a syntax convolutional neural network based DDI extraction method.
+Remaining methods in Table \ref{table:comp} are all deep-learning based methods.
+They can be categorized into two types: convolutional neural network based and bidirectional long short-term memory (Bi-LSTM) network based methods.
+SCNN \cite{zhao_drug_2016} is a syntactical convolutional neural network based DDI extraction method.
 In SCNN, a novel word embedding, syntax embedding, is proposed to employ syntactical information of a sentence.
 SCNN also employs many hand-crafted features to improve the performance of DDI extraction that makes the extraction process more complicated.
-Compared with SCNN, UGC-DDI extracts no traditional feature but achieves a higher F-score, $0.712$ vs. $0.686$.
+Compared to SCNN, UGC-DDI extracts no traditional feature but achieves a higher F-score, $0.712$ vs. $0.686$.
 
 Joint AB-LSTM is a bidirectional long short-term memory based DDI extraction method.
-It joins two separate bidirectional long short-term memory network, B-LSTM and AB-LSTM to generate a sentence embedding.
-B-LSTM and AB-LSTM utilize two different pooling methods max poling and attentive pooling in their own model to unify token embeddings.
-Instead of two independent Bi-LSTM networks, UGC-DDI utilize a stacked two-layer encoder inside the classifier,
-two encoder layers can share the information and communicate with each other.
-Besides the model architecture, UGC-DDI also utilizes domain-specific knowledge such as UGC embeddings and concept embeddings
-in the procedure of DDI extraction.
-Compared with Joint AB-LSTM, UGC-DDI achieves a higher F-score ($0.712$ vs. $0.694$) with a richer set of information sources.
+It joins two separate bidirectional long short-term memory networks; B-LSTM and AB-LSTM, to generate a sentence embedding.
+B-LSTM and AB-LSTM utilize two different pooling methods; max poling and attentive pooling, in their own model to unify token embeddings.
+Instead of two independent Bi-LSTM networks, UGC-DDI utilizes a stacked two-layer encoder inside the classifier,
+two encoder layers can share information by communicating with each other.
+Besides the model architecture, UGC-DDI also utilizes domain-specific knowledge such as UGC and concept embeddings in the procedure of DDI extraction.
+Compared to Joint AB-LSTM, UGC-DDI achieves a higher F-score ($0.712$ vs. $0.694$) with a richer set of information sources.
 
 \bigbreak
 \emph{2) UGC feature analysis}
 \bigbreak
 
-UGC external biomedical resource is a core information source in our UGC-DDI method.
-To evaluate the improvement made by the external UGC resource, we compared the metrics and the loss of our method
+UGC external biomedical resource is the core data source in our UGC-DDI method.
+To evaluate the improvement made by the external UGC resource, we compared the metrics and the loss values of our method
 with and without UGC embeddings in Fig. \ref{fig:ugc-exp} and Fig. \ref{fig:ugc-loss}.
+
 We conduct an extra comparison experiment which concatenates the word embeddings, concept embeddings and two offset embeddings directly as token representations.
 Other model components such as encoders and attentive pooling layer are all the same as the UGC-DDI method settings.
-We can see that the F-score of UGC-DDI method increases more rapidly and climb to a highest peak in a extremely short period (94th epoch in about half an hour).
-Although the method without UGC resource does not get a better performance compared with UGC-DDI,
-it gains a relatively good performance compared with other existing methods, either SVM based methods or deep learning based methods.
-As we mentioned before, UGC embeddings stayed static during the training procedure.
-And the full-attention mechanism does not add new parameters into the model, it just merge UGC embeddings and word embeddings based on their
+We can see that the F-score of UGC-DDI method increases more rapidly and climbs to a highest peak in an extremely short period (94th epoch in about half an hour).
+Although the method without the UGC resource does not indicate an improved performance when compared to UGC-DDI,
+it gains relatively good performance in comparison to other existing methods, either SVM-based methods or deep-learning based methods.
+As we mentioned before, UGC embeddings remained static during the training procedure.
+The full-attention mechanism does not add new parameters into the model, rather merely merges UGC and word embeddings based on their
 scale dot products and summations.
-No extra training cost is needed compared with the method without UGC resource.
-Compared with directly concatenating UGC embeddings with word embeddings or other non-attentive manner,
+No extra training cost is required as compared to the method without the UGC resource.
+In comparison to directly concatenating UGC embeddings with word embeddings or other non-attentive manner,
 full-attention does not increase the dimension of the token representation and enrich the information offered to the classifier.
-This advantage also control the magnitude of parameters of the whole network and prevent suffering from the overfitting issue.
+This advantage also controls the magnitude of parameters of the whole network and prevents suffering from overfitting.
 
-The F-score of the method without the UGC resource is $0.702$ and the F-score is improved by $1\%$ with the utilization of the UGC resource.
+The F-score of the method without UGC resource is $0.702$ and the F-score is improved by $1\%$ with the utilization of the UGC resource.
 
 \begin{figure*}[htb]
     \centering
@@ -591,11 +590,11 @@ The F-score of the method without the UGC resource is $0.702$ and the F-score is
 \section{Conclusions}
 \label{sec:conclusions}
 
-In this study, we proposed a novel methods namely UGC-DDI to extract DDI from biomedical literature automatically.
-We merge user generated content with local contextual information by full-attention mechanism to provide rich and fresh knowledge.
-User generated content are offered in the form of low-dimension embedding vectors.
-Attention outputs are concatenated with concept embeddings and entity offset embeddings together to be the input of the deep learning classifier of our method.
-The experimental result shows that our method gains the highest evaluation metrics values.
+In this study, we proposed a novel method namely UGC-DDI to extract DDI from biomedical literature automatically.
+We merge user generated content with local contextual information through a full-attention mechanism to provide rich and fresh knowledge.
+User generated content is offered in the form of low-dimension embedding vectors.
+Attention outputs are concatenated with concept embeddings and entity offset embeddings to be the input of the deep learning classifier of our method.
+The experimental result shows that our method gains the highest evaluation metrics.
 
 \bibliographystyle{IEEEtran}
 \bibliography{UGC-DDI}

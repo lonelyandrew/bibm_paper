@@ -393,7 +393,6 @@ We used official evaluation metrics, precision (P), recall (R), and F-score (F) 
 \begin{table}
 \caption{Label distribution before and after the negative instance filtering phase.}
 \label{table:neg_filter}
-\normalsize
 \begin{center}
 \begin{tabular}{ccccc}
 \hline
@@ -472,7 +471,6 @@ Pharmacokinetic means that the effects of one drug are changed by the presence o
 
 \begin{table*}
 \caption{Detailed evaluation metrics of DDI-UGC.}
-\normalsize
 \label{table:class_metric}
 \begin{center}
 \begin{tabular}{cccccccc}
@@ -498,7 +496,6 @@ Our methods achieved the highest F-score of 0.712 and the highest recall of 0.66
 
 \begin{table}
 \caption{Performance comparison between methods}
-\normalsize
 \label{table:comp}
 \centering
 \begin{tabular}{cccc}
@@ -555,8 +552,8 @@ Compared with Joint AB-LSTM, UGC-DDI achieves a higher F-score ($0.712$ vs. $0.6
 \bigbreak
 
 UGC external biomedical resource is a core information source in our UGC-DDI method.
-To evaluate the improvement made by the external UGC resource, we compared the metrics of our method
-with and without UGC embeddings in Fig. \ref{fig:ugc-exp}.
+To evaluate the improvement made by the external UGC resource, we compared the metrics and the loss of our method
+with and without UGC embeddings in Fig. \ref{fig:ugc-exp} and Fig. \ref{fig:ugc-loss}.
 We conduct an extra comparison experiment which concatenates the word embeddings, concept embeddings and two offset embeddings directly as token representations.
 Other model components such as encoders and attentive pooling layer are all the same as the UGC-DDI method settings.
 We can see that the F-score of UGC-DDI method increases more rapidly and climb to a highest peak in a extremely short period (94th epoch in about half an hour).
@@ -572,30 +569,24 @@ This advantage also control the magnitude of parameters of the whole network and
 
 The F-score of the method without the UGC resource is $0.702$ and the F-score is improved by $1\%$ with the utilization of the UGC resource.
 
-%\begin{figure}[ht]
-%	\centering
-%	\begin{subfigure}[b]
-%		\includegraphics[scale=0.5]{figures/ugc-exp-f.pdf}
-%	\end{subfigure}
-%	\label{fig:ugc-exp}
-%\end{figure}
-
 \begin{figure*}[htb]
     \centering
     \begin{subfigure}[b]{\textwidth}
     \centering
-        \includegraphics[scale=0.7]{figures/ugc-exp-f}%
-        \includegraphics[scale=0.7]{figures/ugc-exp-r}
-    \end{subfigure}
-    \vskip\baselineskip
-    \begin{subfigure}[b]{\textwidth}
-    \centering
-        \includegraphics[scale=0.7]{figures/ugc-exp-p}%
-        \includegraphics[scale=0.7]{figures/ugc-exp-loss}
+        \includegraphics[scale=0.79]{figures/ugc-exp-f}%
+        \includegraphics[scale=0.79]{figures/ugc-exp-r}
+        \includegraphics[scale=0.79]{figures/ugc-exp-p}%
     \end{subfigure}
     \caption{Metrics comparison of methods with and without UGC resource during the training.}
     \label{fig:ugc-exp}
 \end{figure*}
+
+\begin{figure}[ht]
+	\centering
+	\includegraphics[scale=1]{figures/ugc-exp-loss}
+	\caption{Loss comparison of methods with and without UGC resource during the training.}
+	\label{fig:ugc-loss}
+\end{figure}
 
 \section{Conclusions}
 \label{sec:conclusions}
